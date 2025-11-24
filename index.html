@@ -92,6 +92,7 @@
         <li>Suporte a autenticação via Service Connection ou Service Principal</li>
         <li>Integração com Azure Key Vault (HSM)</li>
         <li>Detecção automática de tipo de arquivo</li>
+        <li>Remoção opcional de assinaturas existentes em arquivos Java (JAR/WAR/EAR)</li>
         <li>Compatível com múltiplos padrões (curingas) no parâmetro <code>filePath</code></li>
         <li>Assinatura com timestamp opcional</li>
         <li>Compatível com agentes Microsoft-hosted e self-hosted</li>
@@ -107,14 +108,15 @@
     keyVaultName: 'meu-keyvault'
     certificateName: 'cert-assinatura'
     filePath: '$(Build.ArtifactStagingDirectory)/**/*.jar, **/*.exe'
-    timestampUrl: 'http://timestamp.globalsign.com/tsa/advanced'</code></pre>
+    timestampUrl: 'http://timestamp.globalsign.com/tsa/advanced'
+    removeJavaSignatures: false  # opcional</code></pre>
     </section>
 
     <section>
       <h2>Requisitos do agente</h2>
       <ul>
         <li>JDK (21 ou 23 preferencialmente) no <code>PATH</code></li>
-        <li>.NET SDK no <code>PATH</code></li>
+        <li>.NET 8 SDK no <code>PATH</code></li>
         <li>Acesso à internet</li>
       </ul>
     </section>
@@ -122,8 +124,9 @@
     <section>
       <h2>Mais Informações</h2>
       <p>
-        Entre em contato com o responsável em luidsonit@gmail.com<br>
-        Desenvolvido por <strong>Luídson Santos</strong><br><a href="https://www.linkedin.com/in/lu%C3%ADdson-santos" target="_blank">LinkedIn</a>
+        Desenvolvido por <strong>Luídson Santos</strong><br>
+        <a href="https://www.linkedin.com/in/lu%C3%ADdson-santos" target="_blank">LinkedIn</a> | 
+        <a href="https://luidson2.github.io/Vault-SecurSign-Doc/" target="_blank">Documentação</a>
       </p>
     </section>
   </main>
