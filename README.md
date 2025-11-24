@@ -9,6 +9,7 @@ Vault SecurSign é uma task para Azure Pipelines que assina automaticamente arqu
 * Detecção automática de tipo de binário
 * Suporte multiplataforma (Windows/Linux)
 * Uso de timestamp opcional
+* Remoção opcional de assinaturas existentes em arquivos Java antes de re-assinar
 * Testado com arquivos `.jar`, `.exe`, `.dll`, `.msi`, `.py`, entre outros
 * Suporte a curingas no `filePath` (ex: `caminho/*.jar`, `**/*.dll`)
 
@@ -23,7 +24,7 @@ Vault SecurSign é uma task para Azure Pipelines que assina automaticamente arqu
 ## Requisitos do build agent
 
 * JDK instalado (recomendado versão 21 ou 23) com `jarsigner` disponível no `PATH`
-* .NET SDK instalado e disponível no `PATH`
+* .NET 8 SDK instalado e disponível no `PATH`
 * O certificado no Key Vault deve estar configurado para operações de assinatura (sign)
 * Acesso à internet para baixar dependências
 * Compatível com agentes Microsoft-hosted e self-hosted (Windows ou Linux)
@@ -36,9 +37,10 @@ Vault SecurSign é uma task para Azure Pipelines que assina automaticamente arqu
 | `connection` | Conexão ARM com acesso ao Key Vault |
 | `clientId`, `clientSecret`, `tenantId` | Dados manuais de autenticação (visíveis se `authMode = manual`) |
 | `keyVaultName` | Nome do Key Vault no Azure |
-| `certificateName`      | Nome (alias) do certificado dentro do Key Vault |
-| `filePath`             | Caminho ou padrão dos arquivos a assinar (ex: `pasta/*.jar`) |
+| `certificateName` | Nome (alias) do certificado dentro do Key Vault |
+| `filePath` | Caminho ou padrão dos arquivos a assinar (ex: `pasta/*.jar`) |
 | `timestampUrl` | URL opcional para serviço de timestamp |
+| `removeJavaSignatures` | Remove assinaturas existentes de JAR/WAR/EAR antes de re-assinar (padrão: `false`) |
 
 
 ## Exemplo de Uso
@@ -52,6 +54,7 @@ Vault SecurSign é uma task para Azure Pipelines que assina automaticamente arqu
     certificateName: 'cert-assinatura'
     filePath: '$(Build.ArtifactStagingDirectory)/binarios/*.jar'
     timestampUrl: 'http://timestamp.globalsign.com/tsa/advanced'
+    removeJavaSignatures: false  # opcional: true para remover assinaturas existentes
 ```
 
 ## Autor
